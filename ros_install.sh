@@ -55,22 +55,22 @@ fi
 
 echo "Add the ROS repository"
 if [ ! -e /etc/apt/sources.list.d/ros-latest.list ]; then
-  sudo sh -c "echo \"deb http://packages.ros.org/ros/ubuntu ${version} main\" > /etc/apt/sources.list.d/ros-latest.list"
+  sh -c "echo \"deb http://packages.ros.org/ros/ubuntu ${version} main\" > /etc/apt/sources.list.d/ros-latest.list"
 fi
 
 echo "Download the ROS keys"
 roskey=`apt-key list | grep "ROS Builder"` && true # make sure it returns true
 if [ -z "$roskey" ]; then
   echo "No ROS key, adding"
-  sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+  apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 fi
 
 echo "Updating & upgrading all packages"
-sudo apt-get update
-sudo apt-get dist-upgrade -y
+apt-get update
+apt-get dist-upgrade -y
 
 echo "Installing ROS"
-sudo apt install -y \
+apt install -y \
      liburdfdom-tools \
      python-rosdep \
      python-rosinstall \
@@ -85,7 +85,7 @@ sudo apt install -y \
 
 # Only init if it has not already been done before
 if [ ! -e /etc/ros/rosdep/sources.list.d/20-default.list ]; then
-  sudo rosdep init
+  rosdep init
 fi
 rosdep update
 
