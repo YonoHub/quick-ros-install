@@ -82,7 +82,7 @@ apt install -y \
      python-catkin-tools \
      python-rosinstall \
      ros-$ROS_DISTRO-desktop
-
+pip install rosdep==0.19.0
 # Only init if it has not already been done before
 if [ ! -e /etc/ros/rosdep/sources.list.d/20-default.list ]; then
   rosdep init
